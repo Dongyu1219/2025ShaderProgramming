@@ -14,8 +14,6 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 #include "Renderer.h"
 
-//git test를 위해 조금 수정해봄 
-
 Renderer *g_Renderer = NULL;
 
 void RenderScene(void)

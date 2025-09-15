@@ -1,0 +1,22 @@
+git clone
+cd 2025 shaderprogramming~
+
+git add . :하위 폴더 모든 파일 추가
+$ git commit -m "base project starts"
+이후 git push
+
+
+=========================
+
+GPU에서 이해할 수 있는 형태로 변형해서 올려주어야 함
+	Vertex Buffer Object 
+
+-========================================================
+
+Vertex Shader
+	하나의 Vertex 단위로 처리되는 stage
+
+세이더 프로그래밍 : 사용자가 정의한 vs 출력 값을 잘 만들자.
+ㄴ
+사용자가 정의한 vertex shader 입력값 : attribute ( vertex 쉐이더의 입력 ) 
+
