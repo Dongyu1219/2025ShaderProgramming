@@ -1,0 +1,29 @@
+시험: 빈칸 체우기( 손 코딩 ) 
+
+openGL은 오른손 좌표계
+
+질문
+	1. 36 개
+	2. 삼각형 12개
+
+그래픽스 파이프 라인
+	Vertex Transform 
+		현재는 Vertex Shader 
+
+	Primitive Assembly
+		점들을 점이냐 line 이냐 triangle이냐 판단
+
+	Rasterization and Interpolation
+		사이사이를 채워준다. ( triangle 을 채워준다. ) 
+		엄청난 양
+	
+	Fragment Operation 
+		현재는 Fragment Shader		
+
+	Frame Buffer 
+
+
+
+
+
+
