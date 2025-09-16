@@ -37,6 +37,10 @@ private:
 	GLuint m_VBOTestPos = 0;
 	GLuint m_VBOTestColor = 0;
 
+	//lecture 3
 	GLuint m_TestShader = 0;
+
+	//Time
+	float m_Time = 0;
 };
 

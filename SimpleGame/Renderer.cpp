@@ -228,8 +228,14 @@ void Renderer::DrawSolidRect(float x, float y, float z, float size, float r, flo
 
 void Renderer::DrawTest()
 {
+	//m_Time += 0.0016;
+	m_Time += 0.0008;
+
 	//Program select
 	glUseProgram(m_TestShader);
+
+	int u_TimeLoc = glGetUniformLocation(m_TestShader, "u_Time");
+	glUniform1f(u_TimeLoc, m_Time);
 
 	int aPosLoc = glGetAttribLocation(m_TestShader, "a_Position");
 	int aColorLoc = glGetAttribLocation(m_TestShader, "a_Color");
