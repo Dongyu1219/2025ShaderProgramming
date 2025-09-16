@@ -19,6 +19,8 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 
 	//Load shaders
 	m_SolidRectShader = CompileShaders("./Shaders/SolidRect.vs", "./Shaders/SolidRect.fs");
+	//
+    m_TestShader = CompileShaders("./Shaders/Test.vs", "./Shaders/Test.fs");
 	
 	//Create VBOs
 	CreateVertexBufferObjects();
@@ -47,13 +49,19 @@ void Renderer::CreateVertexBufferObjects()
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBORect);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(rect), rect, GL_STATIC_DRAW);
 
-	//lecture2
+	float temp = 0.5f;
+	float size = 0.1f;
+
+	//lecture3
 	float testPos[]
 		=
 	{
-		0.f, 0.f, 0.f, 
-		1.f, 0.f, 0.f,
-		1.f, 1.f, 0.f
+		(0.f - temp)* size, (0.f - temp)* size, 0.f,
+		(1.f - temp)* size, (0.f - temp)* size, 0.f,
+		(1.f - temp)* size, (1.f - temp)* size, 0.f,		// 1 triangle
+		(0.f - temp)* size, (0.f - temp)* size, 0.f,
+		(1.f - temp)* size, (1.f - temp)* size, 0.f,
+		(0.f - temp)* size, (1.f - temp)* size, 0.f			//2 triangle
 	};
 
 	glGenBuffers(1, &m_VBOTestPos);					//아직 GPU에 메모리 할당 안됨
@@ -64,6 +72,9 @@ void Renderer::CreateVertexBufferObjects()
 	float testColor[]
 		=
 	{
+		1.f, 0.f, 0.f, 1.f,
+		0.f, 1.f, 0.f, 1.f,
+		0.f, 0.f, 1.f, 1.f,
 		1.f, 0.f, 0.f, 1.f,
 		0.f, 1.f, 0.f, 1.f,
 		0.f, 0.f, 1.f, 1.f
@@ -218,13 +229,10 @@ void Renderer::DrawSolidRect(float x, float y, float z, float size, float r, flo
 void Renderer::DrawTest()
 {
 	//Program select
-	glUseProgram(m_SolidRectShader);
+	glUseProgram(m_TestShader);
 
-	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Trans"), 0, 0, 0, 1);
-	glUniform4f(glGetUniformLocation(m_SolidRectShader, "u_Color"), 1, 1, 1, 1);
-
-	int aPosLoc = glGetAttribLocation(m_SolidRectShader, "a_Position");
-	int aColorLoc = glGetAttribLocation(m_SolidRectShader, "a_Color");
+	int aPosLoc = glGetAttribLocation(m_TestShader, "a_Position");
+	int aColorLoc = glGetAttribLocation(m_TestShader, "a_Color");
 	//
 	glEnableVertexAttribArray(aPosLoc);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestPos);			//bind : 작업하기 위한 공간
@@ -235,7 +243,7 @@ void Renderer::DrawTest()
 	glEnableVertexAttribArray(aColorLoc);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOTestColor);		
 	glVertexAttribPointer(aColorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);	//이부분은 바꿔야함 ( 3-> 4) 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 
 	glDisableVertexAttribArray(aPosLoc);
