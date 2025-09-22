@@ -1,0 +1,16 @@
+shader 외부입력
+	1. vertices
+		per vertex data (버택스 별로 데이터를 바꾼다. ) 
+		각자 다른 정보를 가져야 한다.(버텍스 별로 움직임을 만들고 싶다.)
+	2. uniform
+		time (draw call 단위로 데이터를 바꿀 수 있다.)
+
+		====> 단답형 형태 시험 문제
+
+
+glVertexAttribPointer(aRadiusLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0); 
+숫자채우기 문제
+
+
+x,y,z,value, r,g,b,a -->  vertex
+

@@ -12,16 +12,17 @@ const float c_PI = 3.141592;
 
 void main()
 {
-	float value = fract(u_Time)*2 -1;		// -1 to 1
+	float value = fract(u_Time/3)*2 -1;		// -1 to 1
 	float rad = (value + 1) * c_PI;	
-	float x_value = cos(rad) * a_Radius;
-	float y_value = sin(rad) * a_Radius; 
+	float x_value = a_Radius* cos(rad);
+	float y_value = a_Radius* sin(rad); 
 
 
 	vec4 newPosition = vec4(a_Position, 1);
 
 	newPosition.xy = newPosition.xy + vec2(x_value , y_value);
 	
+
 	gl_Position = newPosition;
 
 	v_Color = a_Color; 
