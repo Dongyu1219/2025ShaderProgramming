@@ -26,7 +26,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	CreateVertexBufferObjects();
 
 	//
-	GenerateParticles(1000);
+	GenerateParticles(10000);
 
 	if (m_SolidRectShader > 0 && m_VBORect > 0)
 	{
@@ -275,8 +275,8 @@ void Renderer::DrawSolidRect(float x, float y, float z, float size, float r, flo
 
 void Renderer::DrawTest()
 {
-	//m_Time += 0.0016;
-	m_Time += 0.0005;
+	m_Time += 0.0016;
+	//m_Time += 0.1;
 
 	//Program select
 	glUseProgram(m_TestShader);
@@ -316,7 +316,7 @@ void Renderer::DrawParticles()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //GL_ONE_MINUS_SRC_ALPHA
 	//m_Time += 0.0016;
-	m_Time += 0.0003;
+	m_Time += 0.0001;
 
 	//Program select
 	GLuint shader = m_particleShader;
@@ -331,7 +331,7 @@ void Renderer::DrawParticles()
 	//u_Force
 
 	int aPosLoc = glGetAttribLocation(shader, "a_Position");
-	int aRadiusLoc = glGetAttribLocation(shader, "a_Radius");
+	int aValueLoc = glGetAttribLocation(shader, "a_Value");
 	int aColorLoc = glGetAttribLocation(shader, "a_Color");
 	int a_STime = glGetAttribLocation(shader, "a_STime");
 	int aVelocity = glGetAttribLocation(shader, "Velocity");
@@ -339,22 +339,25 @@ void Renderer::DrawParticles()
 	int aLifeTime = glGetAttribLocation(shader, "a_lifeTime");
 	int aMassLoc = glGetAttribLocation(shader, "a_mass");
 
+	int aPeriodLoc = glGetAttribLocation(shader, "a_period");
+
 	//
-	int stride = 14;
+	int stride = 15;
 	
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
 
 	glEnableVertexAttribArray(aPosLoc);
-	glEnableVertexAttribArray(aRadiusLoc);
+	glEnableVertexAttribArray(aValueLoc);
 	glEnableVertexAttribArray(aColorLoc);
 	glEnableVertexAttribArray(a_STime);
 	glEnableVertexAttribArray(aVelocity);
 	glEnableVertexAttribArray(aLifeTime);
 	glEnableVertexAttribArray(aMassLoc);
+	glEnableVertexAttribArray(aPeriodLoc);
 
 
 	glVertexAttribPointer(aPosLoc, 3, GL_FLOAT, GL_FALSE, sizeof(float) * stride, 0);
-	glVertexAttribPointer(aRadiusLoc, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 3));			//시험문제
+	glVertexAttribPointer(aValueLoc, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 3));			//시험문제
 	glVertexAttribPointer(aColorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 4));
 	glVertexAttribPointer(a_STime, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 8));
 	glVertexAttribPointer(aVelocity, 3, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 9));
@@ -362,10 +365,12 @@ void Renderer::DrawParticles()
 
 	glVertexAttribPointer(aMassLoc, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 13));
 
+	glVertexAttribPointer(aPeriodLoc, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 14));
 
 
-	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount - 2*9500);
-	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+
+	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount - 2*9500);
+	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
 
 	//glDrawArrays(GL_TRIANGLES, 0,6);
 
@@ -384,7 +389,8 @@ void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)
 
 void Renderer::GenerateParticles(int numParticle)
 {
-	int floatCountPerVertex = 3 + 1 + 4 + 1 + 3 + 1 + 1;		//x + y + z + value + r + g + b + a, startTime , vx, vy, vz, lifeTime, mass
+	int floatCountPerVertex = 3 + 1 + 4 + 1 + 3 + 1 + 1 + 1;		
+	//x + y + z + value + r + g + b + a, startTime , vx, vy, vz, lifeTime, mass, period
 	int verticesCountPerParticle = 6;
 	int floatCountPerParticle = floatCountPerVertex * verticesCountPerParticle;
 	int totalVerticesCount = numParticle * verticesCountPerParticle;
@@ -395,9 +401,10 @@ void Renderer::GenerateParticles(int numParticle)
 	for (int i = 0; i < numParticle; i++)
 	{
 		float x, y, z, value, r, g, b, a, vx, vy, vz, lifeTime, mass;
-		x = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
-		y = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		x = 0.f;	// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		y = 0.f;	// ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		z = 0.f;
+
 		value = ((float)rand() / (float)RAND_MAX);
 		r = ((float)rand() / (float)RAND_MAX);
 		g = ((float)rand() / (float)RAND_MAX);
@@ -413,9 +420,11 @@ void Renderer::GenerateParticles(int numParticle)
 		vy = 0; // ((((float)rand() / (float)RAND_MAX) * 2.f - 1.f) + 1.5f) * 1.5;
 		vz = 0.f;
 
-		lifeTime = ((float)rand() / (float)RAND_MAX);
+		lifeTime = ((float)rand() / (float)RAND_MAX) +0.5f ;
 		
 		mass = ((float)rand() / (float)RAND_MAX) + 1.f;
+		
+		float period = ((float)rand() / (float)RAND_MAX) + 1.f;
 
 		int index = i * floatCountPerVertex * verticesCountPerParticle;
 			
@@ -433,6 +442,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 
 		vertices[index] = x + size; index++;	//v2
 		vertices[index] = y + size; index++;
@@ -448,6 +458,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 
 		vertices[index] = x - size; index++;	//v3
 		vertices[index] = y + size; index++;
@@ -463,6 +474,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 
 		vertices[index] = x - size; index++;	//v4
 		vertices[index] = y - size; index++;
@@ -478,6 +490,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 
 		vertices[index] = x + size; index++;	//v5
 		vertices[index] = y - size; index++;
@@ -493,6 +506,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 
 		vertices[index] = x + size; index++;	//v6
 		vertices[index] = y + size; index++;
@@ -508,6 +522,7 @@ void Renderer::GenerateParticles(int numParticle)
 		vertices[index] = vz; index++;
 		vertices[index] = lifeTime; index++;
 		vertices[index] = mass; index++;
+		vertices[index] = period; index++;
 	}
 
 	glGenBuffers(1, &m_VBOParticle);
