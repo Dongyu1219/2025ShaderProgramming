@@ -14,6 +14,7 @@ but WITHOUT ANY WARRANTY.
 #include "Dependencies\freeglut.h"
 #include "Renderer.h"
 
+
 Renderer *g_Renderer = NULL;
 bool g_bNeedReloadShaderPrograms = false;
 
@@ -32,7 +33,8 @@ void RenderScene(void)
 	// Renderer Test
 	//g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
 	//g_Renderer->DrawTest();
-	g_Renderer->DrawParticles();
+	//g_Renderer->DrawParticles();
+	g_Renderer->DrawGridMesh();
 
 	glutSwapBuffers();
 }

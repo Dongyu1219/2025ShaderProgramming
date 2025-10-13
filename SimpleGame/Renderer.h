@@ -18,12 +18,14 @@ public:
 	void DrawSolidRect(float x, float y, float z, float size, float r, float g, float b, float a);
 	void DrawTest();
 	void DrawParticles();
+	void DrawGridMesh();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
 	void CompileAllShaderPrograms();
 	void DeleteAllShaderPrograms();
 	bool ReadFile(char* filename, std::string *target);
+	void CreateGridMesh(int x, int y);
 	void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType);
 	GLuint CompileShaders(char* filenameVS, char* filenameFS);
 	void CreateVertexBufferObjects();
@@ -55,5 +57,10 @@ private:
 	GLuint m_particleShader = 0;
 	GLuint m_VBOParticle = 0;
 	GLuint m_VBOParticleVertexCount = 0;
+
+	//Grid Mesh
+	GLuint m_GridMeshShader = 0;
+	GLuint m_GridMeshVertexCount = 0;
+	GLuint m_GridMeshVBO = 0;
 };
 

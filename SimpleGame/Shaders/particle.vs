@@ -57,7 +57,6 @@ void sinParticle()
 {
 	vec4 centerC = vec4(1.0, 0.0, 0.0, 1.0);
 	vec4 borderC = vec4(1.0, 1.0, 1.0, 0.0);
-	
 
 	float newTime = u_Time - a_STime ;
 	float lifeTime = a_lifeTime;
@@ -170,8 +169,8 @@ void main()
 {
 	//raining();
 	//sinParticle();
-	//circleParticle();
-	HeartsParticle();
+	circleParticle();
+	//HeartsParticle();
 }
 
 
