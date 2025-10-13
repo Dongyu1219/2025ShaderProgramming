@@ -122,11 +122,47 @@ void circleParticle()
 		newPosition.xy += vec2(-10000,0);
 	}
 
+
 	gl_Position = newPosition;
 	v_Color = vec4(a_Color.rgb, newAlpha); 
 
 }
 
+
+void HeartsParticle()
+{
+    float newTime = u_Time - a_STime;
+    float lifeTime = a_lifeTime;
+    vec4 newPosition = vec4(a_Position, 1);
+    float newAlpha = 1.0;
+
+    if (newTime > 0)
+    {
+        float t = fract(newTime / lifeTime) * lifeTime;
+	float tt = t*t;
+
+        float theta = a_Value * 2.0 * c_PI;
+        float r = 0.05;  // 하트 크기(조절 가능)
+
+        float x = r * 16.0 * pow(sin(theta), 3.0); 
+        float y = r * (13.0 * cos(theta) - 5.0 * cos(2.0 * theta)
+                     - 2.0 * cos(3.0 * theta) - cos(4.0 * theta));  
+        
+		
+	float newX = x + c_Gravity.x*tt;
+	float newY = y + c_Gravity.y*tt;
+
+        newPosition.xy += vec2(newX, newY);
+        newAlpha = 1.0 - t / lifeTime;
+    }
+    else
+    {
+        newPosition.xy += vec2(-10000, 0);
+    }
+
+    gl_Position = newPosition;
+    v_Color = vec4(a_Color.rgb, newAlpha);
+}
 
 
 
@@ -134,7 +170,8 @@ void main()
 {
 	//raining();
 	//sinParticle();
-	circleParticle();
+	//circleParticle();
+	HeartsParticle();
 }
 
 

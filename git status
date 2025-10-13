@@ -1,0 +1,59 @@
+[33mcommit 668a7eec661e031f5f51e39e6a8ed1c145b28448[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32m0930[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Tue Sep 30 12:34:09 2025 +0900
+
+    txt file add
+
+[33mcommit 015544fbf97916887cd14335b8093ba79bdbdaf3[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Mon Sep 29 17:18:20 2025 +0900
+
+    make rain
+
+[33mcommit f6eb9b2c955dcebb21017ac9e63bb009860e4ee9[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Mon Sep 22 17:08:34 2025 +0900
+
+    add particle
+
+[33mcommit b666b0d9b586a7b8515858723e55cb3948703a35[m
+Author: east_star00 <1219kdk@gmail.com>
+Date:   Tue Sep 16 14:16:00 2025 +0900
+
+    Add circle movement
+
+[33mcommit 248895c1ad3867625a62bce955990fea4e96bc95[m
+Author: east_star00 <1219kdk@gmail.com>
+Date:   Tue Sep 16 13:32:44 2025 +0900
+
+    add fs, vs test
+
+[33mcommit 25ca38fd143c44359d4d2c7a1f4ca7e37d9ac321[m
+Author: east_star00 <1219kdk@gmail.com>
+Date:   Tue Sep 16 12:39:10 2025 +0900
+
+    dadf
+
+[33mcommit ab462c9cf03a600de37baa054e3496cd7a59e044[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Mon Sep 15 23:04:58 2025 +0900
+
+    add week2 lecture file
+
+[33mcommit 401bb39701f96adbd8b81e79b9011282390b0622[m
+Author: east_star00 <1219kdk@gmail.com>
+Date:   Mon Sep 15 22:59:41 2025 +0900
+
+    Add lecture file
+
+[33mcommit a86fba535e12259ee7581ff98c2fb51d7a2b868d[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Tue Sep 9 19:12:11 2025 +0900
+
+    draw triangle
+
+[33mcommit fb1950ba1e31d4ae79901a76ab27c3de0e56999c[m
+Author: donggyukim@gram <1219kdk@gmail.com>
+Date:   Tue Sep 9 19:01:29 2025 +0900
+
+    shader programming starts
