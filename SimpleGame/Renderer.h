@@ -67,5 +67,8 @@ private:
 	GLuint m_VBOFullScreen = 0;
 	GLuint m_FullSceenShader = 0;
 
+	//For rainDrop effect
+	float m_Points[100 * 4];
+
 };
 
