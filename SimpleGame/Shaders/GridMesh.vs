@@ -93,8 +93,8 @@ void RainDrop()
 void main()
 {
   //flag();
-  //Wave();
-  RainDrop();
+  Wave();
+  //RainDrop();
 }
 
 

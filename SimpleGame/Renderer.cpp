@@ -504,7 +504,7 @@ void Renderer::DrawParticles()
 
 void Renderer::DrawGridMesh()
 {
-	m_Time += 0.016;
+	m_Time += 0.0016;
 
 
 	float points[12] = { 0, 0, 2, 2,

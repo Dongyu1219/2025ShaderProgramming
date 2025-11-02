@@ -1,0 +1,37 @@
+git log
+
+git branch 
+
+git branch -vv
+
+git branch iss01
+	git checkout iss01
+
+ ----머지하는법---
+git check out main
+git merge iss01
+
+=============
+
+
+쉐이더에서 빼는것(계산하는 것)과 코드에서 빼는거 둘다 결과가 같다.
+	뭐가 나을까?			
+		밖에서 하는것이 낫다. (고정된 케이스 )
+
+
+움직이는 것에 대한 가장 중요한 파라미터 ? ----- 시간
+							shader 단위 
+				vertex 별로 다른 데이터가 필요한 경우
+
+
+직선운동 
+	uniform
+	
+
+세이더에서 제공해주는 함수
+sin / cos / atan /
+
+*frac : 0~1 사이 값으로 바꾸어 준다. 
+
+버텍스 쉐이더에서는 화면에 그려질 위치를 결정한다.
+
