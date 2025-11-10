@@ -17,7 +17,8 @@ void flag()
   //a_position.x -0.5 ~ 0.5 까지 변한다.
     vec4 newPosition = vec4(a_Position, 1.0);
 
-    float value = a_Position.x + 0.5;      //0~ 1
+    //  float value = a_Position.x + 0.5;      //0~ 1
+    float value = (a_Position.x + 1.0) / 2.0;
 
     newPosition.y= newPosition.y * (1-value);  
     
@@ -93,8 +94,8 @@ void RainDrop()
 void main()
 {
   //flag();
-  Wave();
-  //RainDrop();
+  //Wave();
+  RainDrop();
 }
 
 

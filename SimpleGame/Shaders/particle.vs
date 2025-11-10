@@ -167,9 +167,9 @@ void HeartsParticle()
 
 void main()
 {
-	raining();
+	//raining();
 	//sinParticle();
-	//circleParticle();
+	circleParticle();
 	//HeartsParticle();
 }
 
