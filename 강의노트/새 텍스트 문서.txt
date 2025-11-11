@@ -1,0 +1,42 @@
+//8
+float valueX = newPostion.x + 0.5;
+float grayscale = sin(2*PI*valueX*4)
+v_Color = vec4(greyScale);
+
+
+//7
+사진
+
+
+기말: raindrop 한방울만
+
+
+p1. 
+newposition.x = += 2*(aValue - 0.5);
+newposition.y = += sin( 2*(aValue - 0.5) * c_PI) ;
+gl_Position = newPosition
+
+p2.
+newposition.x = += 2*(aValue - 0.5);
+newposition.y = += sin( 2*(aValue - 0.5) * c_PI - u_Time * 2 ) ;
+gl_Position = newPosition
+
+p3.
+newposition.x = += cos (2*(aValue - 0.5) * c_PI );
+newposition.y = += sin( 2*(aValue - 0.5) * c_PI );
+gl_Position = newPosition
+
+p4.
+vec4 newposition ~ 
+사진
+
+
+p5.
+사진
+
+
+
+
+
+
+

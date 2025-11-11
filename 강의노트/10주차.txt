@@ -1,70 +1,85 @@
-깃 관련 시험
-이번엔 특정 버전으로 가기 정리 까지 범위
+여기부터 기말
+//
+// 
+git 오늘한거 : 
 
-그림을 그려서 풀자. 그림을 그리지 않으면 녹록지 않을 수 가 있다. 
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs
+$ git init
+Initialized empty Git repository in D:/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/.git/
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs (master)
+$ git clone ../GitRemote/ Local1
+Cloning into 'Local1'...
+warning: You appear to have cloned an empty repository.
+done.
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs (master)
+$ dir
+Local1
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs (master)
+$ git clone ../GitRemote/Local2
+fatal: repository '../GitRemote/Local2' does not exist
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs (master)
+$ cd Local1
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ vim a.txt
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git add a.txt
+warning: in the working copy of 'a.txt', LF will be replaced by CRLF the next time Git touches it
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git commit -m "add a.txt"
+[master (root-commit) 1ab2e0d] add a.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a.txt
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git clone /GitRemote/Local2
+Cloning into 'Local2'...
+fatal: 'C:/Program Files/Git/GitRemote/Local2' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ dir
+a.txt
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git branch
+* master
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 209 bytes | 209.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To D:/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/../GitRemote/
+ * [new branch]      master -> master
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git branch -a
+* master
+  remotes/origin/master
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git clone ../GitRemote/Local2
+fatal: repository '../GitRemote/Local2' does not exist
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ ^C
+
+kdk12@gram MINGW64 /d/shaderProgramming/2025_shaderProgramming/Reimote/LocalPcs/Local1 (master)
+$ git clone ../GitRemote/ Local2
+fatal: repository '../GitRemote/' does not exist
 
 
-ex ) c1 스냅샷의 내용을 모두 쓰시오.(다올라간 상태)
-( working directory 인 놈을 쓰시오랑 다른 문제이다. ) 
-	a.txt : a
-	add 된 놈만 써야한다.
 
 
-checkout 하면 working directory 에서 d 가 없어진다. (그림판 참고 ) 
-
-
-master에서 d.txt 추가하고 똑같아도 checkout 안된다. add 하면 가능하다 (똑같을때)
-
-이건 시험에 안냄 
-	d가 날아간다?? 왜???
-		commit 에 대한 snapshot 기준으로 비교를 하기 때문에.
-	working directory 의 내용을 써라 ===> a, b, c (d 없음!!)
-
-
-시험 : 고치고 checkout 안됬을때까지 고려해서 답을 쓰자. 됫는지 안됫는지 안알려줌 
-checkout 안되면 원래의 branch에 vim [ 파일 ] 추가됨. 
-
-git branch
-git branch -a 차이점
--a 하면 remote 리포지토리에 있는 branch 까지 빨간색으로 다나온다. 
-
-
-git pull : local 에 remote를 merge ( 가져온다음에 merge ) 
-git push : remote 에 local을 merge
-
-
-시험 : reset 이 들어간다. 
-	hard 안나오고 soft 나 mixed 만 나온다. 
-
-시험에선 git add .
-
-40p 아래 2개는 안나온다. 위에 4개만 !
-
-시험에는 conflict 가 되엇을때는 그파일은 q라고 바뀌고 자동으로 merge 된다.
-
-fast forward merge 가  라인을 모두 쓰시오.
-coflict 이 일어난 라인을 모두 쓰시오.
-merge 가 자동으로 일어난 라인을 모두 쓰시오.			(왠만하면 2개) 
-
-==============================================================
-이미지, GIF 보고 손코딩으로 완성
-	sin함수
-	문제 안에 조건 잇음
-	함수는 리스팅해줌 (이해만 하면 풀 수 있다.)
-================================================================
-git 그래프 그려보자.
-	그래프 이해
-
-
-
-16874
-c3 : 029c5
-8fde3
-77707
-
-
-
-04f1c8
-d2def6
-a15cd96
-
+클론 , wq
