@@ -1,0 +1,19 @@
+#version 330
+
+in vec3 a_Position;
+
+out vec2 v_UV;
+
+//a_Position -1 ~ 1, u : (x+1)/2, v:(1-y)/2
+
+//uniform float u_Time;
+
+void main()
+{
+	vec4 newPosition = vec4( a_Position, 1);
+	gl_Position = newPosition;
+
+	v_UV.x = ((newPosition.x + 1.0 )/ 2.0);
+	v_UV.y = ((newPosition.y + 1.0) / 2.0);
+
+}
