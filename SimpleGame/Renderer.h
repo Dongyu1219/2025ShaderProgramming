@@ -4,8 +4,10 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <cassert>
 
 #include "Dependencies\glew.h"
+#include "LoadPng.h"
 
 class Renderer
 {
@@ -34,6 +36,7 @@ private:
 	void GetGLPosition(float x, float y, float *newX, float *newY);
 	//
 	void GenerateParticles(int numParticle);
+	GLuint CreatePngTexture(char* filePath, GLuint samplingMethod);
 
 
 	bool m_Initialized = false;
@@ -76,5 +79,8 @@ private:
 	GLuint m_VBOFS = 0;
 	GLuint m_FSShader = 0;
 
+	//Textures
+	GLuint m_RGBTexture = 0; 
+	GLuint m_Texture0 = 0;
 };
 

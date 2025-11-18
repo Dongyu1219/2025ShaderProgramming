@@ -33,6 +33,8 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	//Create Particles
 	GenerateParticles(10000);
 
+	m_RGBTexture = CreatePngTexture("./rgb.png", GL_NEAREST);
+
 	//Fill Points
 	int index = 0;
 	for (int i = 0; i < 100; i++)
@@ -59,6 +61,31 @@ bool Renderer::IsInitialized()
 {
 	return m_Initialized;
 }
+
+GLuint Renderer::CreatePngTexture(char* filePath, GLuint samplingMethod)
+{
+	//Load Png
+	std::vector<unsigned char> image;
+	unsigned width, height;
+	unsigned error = lodepng::decode(image, width, height, filePath);
+	if (error != 0)
+	{
+		std::cout << "PNG image loading failed:" << filePath << std::endl;
+		assert(0);
+	}
+
+	GLuint temp;
+	glGenTextures(1, &temp);
+	glBindTexture(GL_TEXTURE_2D, temp);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA,
+		GL_UNSIGNED_BYTE, &image[0]);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, samplingMethod);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, samplingMethod);
+
+	return temp;
+}
+
 
 void Renderer::RealoadAllShaderPrograms()
 {
@@ -518,10 +545,10 @@ void Renderer::DrawParticles()
 	glDisable(GL_BLEND); 
 }
 
-
 void Renderer::DrawGridMesh()
 {
 	m_Time += 0.0016;
+
 
 
 	float points[12] = { 0, 0, 2, 2,
@@ -539,6 +566,8 @@ void Renderer::DrawGridMesh()
 	glUniform4fv(uPointsLoc, 100, m_Points);
 	
 	//
+	int uTextureLoc = glGetUniformLocation(shader, "u_RGBTexture");
+	glUniform1i(uTextureLoc, 0);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 
@@ -553,7 +582,6 @@ void Renderer::DrawGridMesh()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
-
 
 void Renderer::DrawFullScreenColor(float r, float g, float b, float a)
 {
@@ -593,6 +621,10 @@ void Renderer::DrawFS()
 
 	int u_TimeLoc = glGetUniformLocation(shader, "u_Time");
 	glUniform1f(u_TimeLoc, m_Time);
+	int uTextureLoc = glGetUniformLocation(shader, "u_RGBTexture");
+	glUniform1i(uTextureLoc, 0);
+
+	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 
@@ -609,10 +641,6 @@ void Renderer::DrawFS()
 	glDisable(GL_BLEND);
 
 }
-
-
-
-
 
 
 void Renderer::GetGLPosition(float x, float y, float *newX, float *newY)
