@@ -1,0 +1,41 @@
+offset 연속된 값을 활용해서 ppt 실습 문제 해보기! ( Brink() ) 
+floor( newUV.y* 2) * 0.5
+
+원래
+	void Brick_Horizontal() 
+	{
+		vec2 newUV = vec2(v_UV.x, v_UV.y) ;		//0~1, left bottom ( 0 0 )
+		float rCount = 2;
+		float x = fract(2 * newUV.x) + floor( newUV.y* 2) * 0.5 ;	// + floor( newUV.y* 2+ 1) * 0.5		//괄호안 공부하기 
+		float y = fract(2 * newUV.y);			//0~1,0~1
+
+		vec4 newColor = texture(u_RGBTexture, vec2(x, y));
+
+		FragColor = newColor;
+	}
+
+
+==========================================
+<다중 텍스쳐 사용>
+기존에는 glUniform1i에서 0을 넘겨서 디폴트로 0번 슬롯에 바인드하고 있었다.
+
+시험문제 : 
+void Digit_Num()
+{
+	int digit = 3;
+
+	float offsetX = ( ________________________________ ) 
+	float offsetY = ( ________________________________ ) 
+
+	float tx = v_UV.x * 0.2 + offsetX;
+	float ty = v_UV.y * 0.5 + offsetY;
+	FragColor = texture(u_NumTexture, vec2(tx, ty));
+}
+
+
+
+
+
+
+
+	

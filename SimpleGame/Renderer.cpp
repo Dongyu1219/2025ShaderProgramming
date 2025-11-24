@@ -34,6 +34,17 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	GenerateParticles(10000);
 
 	m_RGBTexture = CreatePngTexture("./rgb.png", GL_NEAREST);
+	m_0Texture = CreatePngTexture("0.png", GL_NEAREST);
+	m_1Texture = CreatePngTexture("1.png", GL_NEAREST);
+	m_2Texture = CreatePngTexture("2.png", GL_NEAREST);
+	m_3Texture = CreatePngTexture("3.png", GL_NEAREST);
+	m_4Texture = CreatePngTexture("4.png", GL_NEAREST);
+	m_5Texture = CreatePngTexture("5.png", GL_NEAREST);
+	m_6Texture = CreatePngTexture("6.png", GL_NEAREST);
+	m_7Texture = CreatePngTexture("7.png", GL_NEAREST);
+	m_8Texture = CreatePngTexture("8.png", GL_NEAREST);
+	m_9Texture = CreatePngTexture("9.png", GL_NEAREST);
+	m_AllTexture = CreatePngTexture("numbers.png", GL_NEAREST);
 
 	//Fill Points
 	int index = 0;
@@ -614,17 +625,64 @@ void Renderer::DrawFS()
 {
 	int shader = m_FSShader;
 
-	m_Time += 0.0016;
+	m_Time += 0.0008;
 
 	//Program select
 	glUseProgram(shader);
 
 	int u_TimeLoc = glGetUniformLocation(shader, "u_Time");
 	glUniform1f(u_TimeLoc, m_Time);
+
 	int uTextureLoc = glGetUniformLocation(shader, "u_RGBTexture");
 	glUniform1i(uTextureLoc, 0);
 
+	int uDigitTextureLoc = glGetUniformLocation(shader, "u_DigitTexture");
+	glUniform1i(uDigitTextureLoc, (int)floor(m_Time)%10);
+
+	int uNumTextureLoc = glGetUniformLocation(shader, "u_NumTexture");
+	glUniform1i(uNumTextureLoc, 10);
+
+
+	glActiveTexture(GL_TEXTURE15);
 	glBindTexture(GL_TEXTURE_2D, m_RGBTexture);
+
+	//
+	//
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_0Texture);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_1Texture);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, m_2Texture);
+
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, m_3Texture);
+
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, m_4Texture);
+
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, m_5Texture);
+
+	glActiveTexture(GL_TEXTURE6);
+	glBindTexture(GL_TEXTURE_2D, m_6Texture);
+
+	glActiveTexture(GL_TEXTURE7);
+	glBindTexture(GL_TEXTURE_2D, m_7Texture);
+
+	glActiveTexture(GL_TEXTURE8);
+	glBindTexture(GL_TEXTURE_2D, m_8Texture);
+
+	glActiveTexture(GL_TEXTURE9);
+	glBindTexture(GL_TEXTURE_2D, m_9Texture);
+
+	glActiveTexture(GL_TEXTURE10);
+	glBindTexture(GL_TEXTURE_2D, m_AllTexture);
+	//
+	//
+
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");
 
