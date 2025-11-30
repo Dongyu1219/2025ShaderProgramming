@@ -1,5 +1,6 @@
 #version 330
 
+	//layout은 로케이션을 지정할 수 있다. 
 	layout(location=0) out vec4 FragColor;
 
 	in vec2 v_UV;
