@@ -158,7 +158,7 @@ void Digit_Num()
 	int tileIndex = (digit + 9) % 10;
 
 	float offsetX = float(tileIndex % 5 ) / 5;
-	float offsetY = floor(tileIndex / 5 )/2 ;
+	float offsetY = floor(float(tileIndex) / 5 )/2 ;
 
 	float tx = v_UV.x/5 + offsetX;
 	float ty = v_UV.y/2 + offsetY;

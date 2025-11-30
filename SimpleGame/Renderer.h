@@ -20,6 +20,7 @@ public:
 	void DrawSolidRect(float x, float y, float z, float size, float r, float g, float b, float a);
 	void DrawTest();
 	void DrawParticles();
+	void DrawMySelf();
 	void DrawGridMesh();
 	void DrawFullScreenColor(float r, float g, float b, float a);
 	void DrawFS();
@@ -117,6 +118,8 @@ private:
 	GLuint m_FBO2 = 0;
 	GLuint m_FBO3 = 0;
 	GLuint m_FBO4 = 0;
+
+	GLuint m_DrawMyself = 0;
 
 };
 

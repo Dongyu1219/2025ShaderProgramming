@@ -220,7 +220,7 @@ void Renderer::CompileAllShaderPrograms()
 	m_FSShader = CompileShaders("./Shaders/FS.vs", "./Shaders/FS.fs");
 	m_TexShader = CompileShaders("./Shaders/Texture.vs", "./Shaders/Texture.fs");
 
-
+	m_DrawMyself = CompileShaders("./Shaders/myShader.vs", "./Shaders/myShader.fs");
 }
 
 
@@ -692,6 +692,58 @@ void Renderer::DrawParticles()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glDisable(GL_BLEND); 
+}
+
+void Renderer::DrawMySelf()
+{
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //GL_ONE_MINUS_SRC_ALPHA
+	//m_Time += 0.0016;
+	m_Time += 0.0001;
+
+	//Program select
+	GLuint shader = m_DrawMyself;
+	glUseProgram(shader);
+
+	int u_TimeLoc = glGetUniformLocation(shader, "u_Time");
+	glUniform1f(u_TimeLoc, m_Time);
+	//
+
+	int uForceLoc = glGetUniformLocation(shader, "u_Force");
+	glUniform3f(uForceLoc, std::sin(m_Time), 0, 0);
+	//u_Force
+
+	int aPosLoc = glGetAttribLocation(shader, "a_Position");
+	int aValueLoc = glGetAttribLocation(shader, "a_Value");
+	int aColorLoc = glGetAttribLocation(shader, "a_Color");
+	int a_STime = glGetAttribLocation(shader, "a_STime");
+
+	//
+	int stride = 15;
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOParticle);
+
+	glEnableVertexAttribArray(aPosLoc);
+	glEnableVertexAttribArray(aValueLoc);
+	glEnableVertexAttribArray(aColorLoc);
+	glEnableVertexAttribArray(a_STime);
+
+
+	glVertexAttribPointer(aPosLoc, 3, GL_FLOAT, GL_FALSE, sizeof(float) * stride, 0);
+	glVertexAttribPointer(aValueLoc, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 3));		
+	glVertexAttribPointer(aColorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 4));
+	glVertexAttribPointer(a_STime, 1, GL_FLOAT, GL_FALSE, sizeof(float) * stride, (GLvoid*)(sizeof(float) * 8));
+
+
+	glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount - 2 * 9500);
+	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+
+	//glDrawArrays(GL_TRIANGLES, 0,6);
+
+	glDisableVertexAttribArray(aPosLoc);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glDisable(GL_BLEND);
 }
 
 void Renderer::DrawGridMesh()
