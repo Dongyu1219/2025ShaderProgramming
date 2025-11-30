@@ -31,19 +31,19 @@ void RenderScene(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	g_Renderer->DrawFullScreenColor(0, 0, 0, 0.5);
-	//glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	//g_Renderer->DrawFullScreenColor(0, 0, 0, 0.5);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Renderer Test
 	//g_Renderer->DrawSolidRect(0, 0, 0, 4, 1, 0, 1, 1);
 	//g_Renderer->DrawTest();	
-	g_Renderer->DrawParticles();
+	//g_Renderer->DrawParticles();
 	//g_Renderer->DrawGridMesh();
 	//g_Renderer->DrawFS();
 	
 	//new
-	/*g_Renderer->DrawFBOs();
-	g_Renderer->DrawDebugTextures();*/
+	g_Renderer->DrawFBOs();
+	g_Renderer->DrawDebugTextures();
 
 
 	glutSwapBuffers();
