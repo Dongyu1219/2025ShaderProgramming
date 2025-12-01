@@ -2,6 +2,7 @@
 
 	//layout은 로케이션을 지정할 수 있다. 
 	layout(location=0) out vec4 FragColor;
+	layout(location=1) out vec4 FragColor1;
 
 	in vec2 v_UV;
 
@@ -14,7 +15,7 @@
 	uniform float u_Time;
 
 
-	void Test()
+	vec4 Test()
 	{
 		vec2 newUV = v_UV;
 		float dx = 0.1 * sin(v_UV.y*2 * C_PI + u_Time ); 
@@ -24,11 +25,11 @@
 
 		vec4 sampledColor = texture(u_RGBTexture, newUV);
 
-		FragColor = sampledColor;
+		return sampledColor;
 	}
 
 
-	void Circles()
+	vec4 Circles()
 	{
 		vec2 newUV = v_UV;				//0 ~ 1 , left top = (0, 0)
 		vec2 center = vec2(0.5, 0.5);
@@ -39,11 +40,11 @@
 		float value = sin(d*4 * C_PI * 4 + u_Time);
 		newColor = vec4(value);
 		
-		FragColor = newColor;
+		return newColor;
 	}
 
 
-	void Flag()
+	vec4 Flag()
 	{
 		vec2 newUV = vec2(v_UV.x, 1- v_UV.y -0.5 ) ;			//가운데가 0 0 
 		vec4 newColor = vec4(0);
@@ -59,10 +60,10 @@
 		}
 		else
 		{
-			discard;
+			//discard;
 		}
 
-		FragColor = newColor;
+		return newColor;
 	}
 
 
@@ -151,7 +152,7 @@ void Digit()
 }
 
 
-void Digit_Num()
+vec4 Digit_Num()
 {
 	int digit = int(u_Time) % 10;
 
@@ -162,11 +163,11 @@ void Digit_Num()
 
 	float tx = v_UV.x/5 + offsetX;
 	float ty = v_UV.y/2 + offsetY;
-	FragColor = texture(u_NumTexture, vec2(tx, ty));
+	return texture(u_NumTexture, vec2(tx, ty));
 }
 
 
-void Digit_Num_AI()
+vec4 Digit_Num_AI()
 {
 	// 1. 몇 자리 숫자로 만들지 설정 (5자리)
 	float digitCount = 5.0;
@@ -200,7 +201,7 @@ void Digit_Num_AI()
 	float tx = localUV.x / 5.0 + offsetX;
 	float ty = localUV.y / 2.0 + offsetY;
 
-	FragColor = texture(u_NumTexture, vec2(tx, ty));
+	return texture(u_NumTexture, vec2(tx, ty));
 }
 
 	void main()
@@ -216,5 +217,8 @@ void Digit_Num_AI()
 		//Digit();
 		//Digit_Num();
 		Digit_Num_AI();
+
+		FragColor = Flag();
+		FragColor1 =  Circles();
 	}
 	

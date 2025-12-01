@@ -30,6 +30,7 @@ void Q1 ()
 	v_Color = a_Color;
 }
 
+
 void Q2()
 {
 	vec4 newPosition = vec4(a_Position, 1);
@@ -41,6 +42,7 @@ void Q2()
 	gl_Position = newPosition;
 	v_Color = a_Color;
 }
+
 
 void Q3()
 {
@@ -77,13 +79,28 @@ void Q5()
 	v_Color = a_Color;
 }
 
+
+void Q7()
+{
+	vec4 newPosition = vec4(a_Position, 1);
+
+	float valueX = newPosition.x + 0.5;
+	float valueY = newPosition.y + 0.5; 
+	float greyScale = sin(2*c_PI*valueX * 4);
+	greyScale += sin(2*c_PI*valueY * 4);
+
+	v_Color - vec4(greyScale);
+	v_Color.a = 0;
+
+	gl_Position = newPosition;
+}
+
 void main()
 {
 	//Q1();
 	//Q2();
 	//Q3();
 	//Q4();
-	Q5();
+	//Q5();
+	Q7();
 }
-
-
