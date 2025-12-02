@@ -43,7 +43,8 @@ void RenderScene(void)
 	//g_Renderer->DrawFS();
 	
 	//new
-	g_Renderer->DrawFBOs();
+	//g_Renderer->DrawFBOs();
+	g_Renderer -> DrawBloomParicle();
 	g_Renderer->DrawDebugTextures();
 
 
@@ -80,8 +81,8 @@ void SpecialKeyInput(int key, int x, int y)
 
 int main(int argc, char **argv)
 {
-	int winX = 512;
-	int winY = 512;
+	int winX = 1024;
+	int winY = 1024;
 	// Initialize GL things
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

@@ -8,8 +8,10 @@ in vec3 Velocity;
 in float a_lifeTime;
 in float a_mass; 
 in float a_period;
+in vec2 a_Tex;
 
 out vec4 v_Color;
+out vec2 v_UV;
 
 uniform float u_Time;
 uniform vec3 u_Force;
@@ -172,6 +174,8 @@ void main()
 	//circleParticle();
 	HeartsParticle();
 	//Q1();
+
+	v_UV = a_Tex;
 }
 
 
