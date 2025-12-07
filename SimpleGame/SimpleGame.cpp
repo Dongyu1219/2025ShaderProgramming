@@ -44,9 +44,13 @@ void RenderScene(void)
 	
 	//new
 	//g_Renderer->DrawFBOs();
-	g_Renderer -> DrawBloomParicle();
-	g_Renderer->DrawDebugTextures();
+	
+	//final
+	//g_Renderer -> DrawBloomParicle();
+	//g_Renderer->DrawDebugTextures();
 
+	//g_Renderer->DrawPractice();
+	g_Renderer->DrawMySelf();
 
 	glutSwapBuffers();
 }

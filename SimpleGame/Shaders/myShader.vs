@@ -89,7 +89,7 @@ void Q7()
 	float greyScale = sin(2*c_PI*valueX * 4);
 	greyScale += sin(2*c_PI*valueY * 4);
 
-	v_Color - vec4(greyScale);
+	v_Color = vec4(greyScale);
 	v_Color.a = 0;
 
 	gl_Position = newPosition;
@@ -101,6 +101,6 @@ void main()
 	//Q2();
 	//Q3();
 	//Q4();
-	//Q5();
-	Q7();
+	Q5();
+	//Q7();
 }

@@ -20,7 +20,6 @@ public:
 	void DrawSolidRect(float x, float y, float z, float size, float r, float g, float b, float a);
 	void DrawTest();
 	void DrawParticles();
-	void DrawMySelf();
 	void DrawGridMesh();
 	void DrawFullScreenColor(float r, float g, float b, float a);
 	void DrawFS();
@@ -28,6 +27,9 @@ public:
 	void DrawDebugTextures();
 	void DrawFBOs();
 	void DrawBloomParicle();
+	//
+	void DrawMySelf();
+	void DrawPractice();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -76,6 +78,10 @@ private:
 	//Full screen 
 	GLuint m_VBOFullScreen = 0;
 	GLuint m_FullSceenShader = 0;
+
+	//practice
+	GLuint m_DrawMyself = 0;
+	GLuint m_PracticeShader = 0;
 
 	//For rainDrop effect
 	float m_Points[100 * 4];
@@ -131,7 +137,8 @@ private:
 	GLuint m_PingpongFBO[2];
 	GLuint	m_PingpongTexture[2];
 
-	GLuint m_DrawMyself = 0;
-
+	//
+	GLuint m_PracticeVBO;
+	GLuint m_PracticeParticleVBO;
 };
 
