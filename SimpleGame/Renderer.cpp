@@ -301,6 +301,7 @@ void Renderer::CompileAllShaderPrograms()
 
 	m_DrawMyself = CompileShaders("./Shaders/myShader.vs", "./Shaders/myShader.fs");
 	m_PracticeShader = CompileShaders("./Shaders/MyPractice.vs", "./Shaders/MyPractice.fs");
+	m_FragmentSandBoxShader = CompileShaders("./Shaders/FragmentSandBox.vs", "./Shaders/FragmentSandBox.fs");
 }
 
 void Renderer::DeleteAllShaderPrograms()
@@ -433,7 +434,6 @@ void Renderer::CreateVertexBufferObjects()
 	glBindBuffer(GL_ARRAY_BUFFER, m_TexVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(texRect), texRect, GL_STATIC_DRAW);
 
-	//
 	float pracvertices[] =
 	{ 0.0f, 0.0f, 0.0f,
 	0.1f, 0.0f, 0.0f,
@@ -442,6 +442,23 @@ void Renderer::CreateVertexBufferObjects()
 	glGenBuffers(1, &m_PracticeVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_PracticeVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pracvertices), pracvertices, GL_STATIC_DRAW);
+
+	float FragmentVertices[] =
+	{
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f,
+
+		-0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
+	};
+
+	glGenBuffers(1, &m_FragmentSandBoxVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_FragmentSandBoxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(FragmentVertices), FragmentVertices, GL_STATIC_DRAW);
+
+
 }
 
 void Renderer::CreateGridMesh(int x, int y)
@@ -798,8 +815,6 @@ void Renderer::DrawGridMesh()
 {
 	m_Time += 0.0016;
 
-
-
 	float points[12] = { 0, 0, 2, 2,
 						0.5, 0, 3, 3,
 						-0.5, 0, 4, 4 };
@@ -1008,7 +1023,6 @@ void Renderer::DrawDebugTextures()
 	//DrawTexture(0.5f, -0.5f, 0.5f, 0.5f, m_HDRRT0_0,0,0);
 	
 }
-
 
 void Renderer::DrawFBOs()
 {
@@ -1313,4 +1327,29 @@ void Renderer::DrawPractice()
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glDisableVertexAttribArray(aPosLoc);
+}
+
+void Renderer::DrawFragmentSandBox()
+{
+	m_Time += 0.0008;
+	//m_Time += 0.1;
+
+	//Program select
+	glUseProgram(m_FragmentSandBoxShader);
+
+	int u_TimeLoc = glGetUniformLocation(m_FragmentSandBoxShader, "u_Time");
+	glUniform1f(u_TimeLoc, m_Time);
+
+	int aPosLoc = glGetAttribLocation(m_FragmentSandBoxShader, "a_Position");
+	//
+	glEnableVertexAttribArray(aPosLoc);
+	glBindBuffer(GL_ARRAY_BUFFER, m_FragmentSandBoxVBO);			//bind : 작업하기 위한 공간
+	glVertexAttribPointer(aPosLoc, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	//glDrawArrays(GL_TRIANGLES, 0, m_VBOParticleVertexCount);
+
+
+	glDisableVertexAttribArray(aPosLoc);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

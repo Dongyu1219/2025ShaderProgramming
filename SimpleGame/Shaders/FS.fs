@@ -207,7 +207,7 @@ vec4 Digit_Num_AI()
 	void main()
 	{
 		//Test();
-		//Circles();
+	//	Circles();
 		//Flag();
 		//Q1();
 		//Q2();
@@ -216,9 +216,11 @@ vec4 Digit_Num_AI()
 		//Brick_Vertical();
 		//Digit();
 		//Digit_Num();
-		Digit_Num_AI();
+		//Digit_Num_AI();
 
-		FragColor = Flag();
-		FragColor1 =  Circles();
+
+		FragColor = Circles();
+		//FragColor = Flag();
+		//FragColor1 =  Circles();
 	}
 	

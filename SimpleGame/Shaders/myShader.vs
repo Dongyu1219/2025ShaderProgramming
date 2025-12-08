@@ -6,7 +6,7 @@ in vec4 a_Color;
 in float a_STime;
 in vec3 Velocity;
 
-out vec4 v_Color;
+out vec4 v_Color ;
 
 uniform float u_Time;
 uniform vec3 u_Force;
@@ -90,7 +90,7 @@ void Q7()
 	greyScale += sin(2*c_PI*valueY * 4);
 
 	v_Color = vec4(greyScale);
-	v_Color.a = 0;
+	v_Color.a = 1;
 
 	gl_Position = newPosition;
 }
@@ -101,6 +101,8 @@ void main()
 	//Q2();
 	//Q3();
 	//Q4();
-	Q5();
-	//Q7();
+	//Q5();
+	Q7();
+
+	//v_Color = a_Color;
 }

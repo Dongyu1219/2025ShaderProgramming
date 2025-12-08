@@ -45,7 +45,7 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SimpleGame.cpp">
-      <Filter>소스 파일\Shaders</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +101,12 @@
       <Filter>소스 파일\Shaders</Filter>
     </None>
     <None Include="Shaders\MyPractice.vs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\FragmentSandBox.vs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\FragmentSandBox.fs">
       <Filter>소스 파일\Shaders</Filter>
     </None>
   </ItemGroup>

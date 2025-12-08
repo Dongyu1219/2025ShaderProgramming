@@ -30,6 +30,7 @@ public:
 	//
 	void DrawMySelf();
 	void DrawPractice();
+	void DrawFragmentSandBox();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -140,5 +141,9 @@ private:
 	//
 	GLuint m_PracticeVBO;
 	GLuint m_PracticeParticleVBO;
+
+	GLuint m_FragmentSandBoxShader = 0 ;
+	GLuint m_FragmentSandBoxVBO = 0;
+	GLuint m_FragmentSandBoxTime = 0;
 };
 

@@ -21,10 +21,10 @@ void flag()
     //float value = a_Position.x + 0.5;      //0~ 1
     float value = (a_Position.x + 1.0) / 2.0;
 
-    //newPosition.y= newPosition.y * (1-value);  
+    newPosition.y= newPosition.y * (1-value);  
     
     float dX = 0;
-    float dY = value * 0.5 * sin(2 * value * c_PI - u_Time * 3 );   
+    float dY = value * 0.5 * sin(2 * value * c_PI - u_Time * 3 ) ;   
     float newColor = (sin(2 * value * c_PI - u_Time * 3 ) + 1) /2;   
 
     newPosition += vec4(dX, dY, 0.0, 0.0);
@@ -92,12 +92,23 @@ void RainDrop()
     v_Color = vec4(newColor);
 }
 
+void newFlag()
+{
+    vec4 newPosition = vec4(a_Position, 1.0);
+    float sinInput = (a_Position.x + 0.5) * 2 * c_PI ;
+    newPosition.y = (1- (a_Position.x + 1.0) / 2.0) * newPosition.y + 0.2 * sin(sinInput + u_Time * 3) ;
+
+    gl_Position = newPosition;
+  
+}
 
 void main()
 {
-  flag();
+    flag();
   //Wave();
   //RainDrop();
+
+  //newFlag();
 }
 
 

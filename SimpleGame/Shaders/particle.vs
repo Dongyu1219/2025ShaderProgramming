@@ -173,7 +173,6 @@ void main()
 	//sinParticle();
 	//circleParticle();
 	HeartsParticle();
-	//Q1();
 
 	v_UV = a_Tex;
 }
